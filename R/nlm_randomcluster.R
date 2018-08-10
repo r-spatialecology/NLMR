@@ -68,7 +68,7 @@ nlm_randomcluster <- function(ncol, nrow,
   ranclumap <- nlm_percolation(ncol, nrow, p, resolution = resolution)
 
   # Step B - Cluster identification (clustering of adjoining pixels)
-  ranclumap <- raster::clump(ranclumap, direction = neighbourhood, gaps = FALSE)
+  ranclumap <- .get_patches(ranclumap, neighbourhood = neighbourhood)
 
   # Step C - Cluster type assignation
   # number of different cluster
@@ -124,4 +124,39 @@ nlm_randomcluster <- function(ncol, nrow,
   }
 
   return(ranclumap)
+}
+
+.get_patches <- function(landscape, neighbourhood = 4) {
+
+  landscape_extent <- raster::extent(landscape)
+
+  landscape_empty <- raster::raster(
+    x = landscape_extent,
+    resolution = raster::res(landscape),
+    crs = raster::crs(landscape)
+  )
+
+  filter_matrix <-
+    matrix(NA,
+           nrow = raster::nrow(landscape),
+           ncol = raster::ncol(landscape))
+
+  landscape_matrix <- raster::as.matrix(landscape)
+
+
+  filter_matrix[landscape_matrix == 1] <- 1
+
+  if (neighbourhood == 4) {
+    filter_raster = .Call('ccl_4', filter_matrix, PACKAGE = 'NLMR')
+  }
+
+  if (neighbourhood == 8) {
+    filter_raster = .Call('ccl_8', filter_matrix, PACKAGE = 'NLMR')
+  }
+
+  patch_landscape <- raster::setValues(x = landscape_empty,
+                                       values = filter_raster)
+
+  return(patch_landscape)
+
 }
