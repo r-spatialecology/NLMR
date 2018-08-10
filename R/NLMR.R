@@ -11,6 +11,11 @@
 #' handle the simulations.}
 #' }
 #'
+#' @name NLMR
+#' @docType package
+#'
+#' @useDynLib NLMR, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
 
 # nocov start
 # nolint start
