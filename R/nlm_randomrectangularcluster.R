@@ -14,7 +14,7 @@
 #' with rectangles defined by \code{minl} and \code{maxl} until the surface
 #' of the landscape is completely covered.
 #' This is one type of realisation of a "falling/dead leaves" algorithm,
-#' for more details see Galerne & Goussea (2012).
+#' for more details see Galerne & Gousseau (2012).
 #'
 #' @return RasterLayer
 #'
@@ -27,14 +27,13 @@
 #'
 #' @examples
 #' # simulate random rectangular cluster
-#' randomrectangular_cluster <- nlm_randomrectangularcluster(ncol = 30,
+#' randomrectangular_cluster <- nlm_randomrectangularcluster(ncol = 50,
 #'                                                           nrow = 30,
 #'                                                           minl = 5,
 #'                                                           maxl = 10)
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(randomrectangular_cluster, margin = FALSE,
-#' par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(randomrectangular_cluster)
 #' }
 #'
 #' @aliases nlm_randomrectangularcluster
@@ -63,30 +62,13 @@ nlm_randomrectangularcluster <-
     checkmate::assert_true(minl <= maxl)
     checkmate::assert_logical(rescale)
 
-    # Create an empty matrix of correct dimensions ----
-    matrix <- matrix(NA, ncol, nrow)
-
-    # Keep applying random clusters until all elements have a value -----
-    while (any(is.na(matrix))) {
-      width <- sample(minl:maxl, 1)
-      height <- sample(minl:maxl, 1)
-
-      row <- sample(1:nrow, 1)
-      col <- sample(1:ncol, 1)
-
-      matrix[
-        if ( (row + width) < nrow) {
-          row:(row + width)
-        } else {
-          row:nrow
-        },
-        if ( (col + height) < ncol) {
-          col:(col + height)
-        } else {
-          col:ncol
-        }
-      ] <- stats::runif(1, 0, 1)
-    }
+    # Create the landscape matrix with rcpp_randomrectangularcluster  ----
+    seed <- sample.int(.Machine$integer.max, 1)
+    matrix <- rcpp_randomrectangularcluster(ncol = ncol,
+                                            nrow = nrow,
+                                            minl = minl,
+                                            maxl = maxl,
+                                            seed)
 
     # Transform to raster ----
     rndreccluster_raster <- raster::raster(matrix)

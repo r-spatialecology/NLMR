@@ -4,9 +4,17 @@
 \alias{nlm_gaussianfield}
 \title{nlm_gaussianfield}
 \usage{
-nlm_gaussianfield(ncol, nrow, resolution = 1, autocorr_range = 10,
-  mag_var = 5, nug = 0.2, mean = 0.5, user_seed = NULL,
-  rescale = TRUE)
+nlm_gaussianfield(
+  ncol,
+  nrow,
+  resolution = 1,
+  autocorr_range = 10,
+  mag_var = 5,
+  nug = 0.2,
+  mean = 0.5,
+  user_seed = NULL,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -56,11 +64,11 @@ gaussian_field <- nlm_gaussianfield(ncol = 90, nrow = 90,
 
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(gaussian_field, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(gaussian_field)
 }
 
 }
 \references{
-Kéry & Royle (2016) \emph{Applied Hierarachical Modeling in Ecology}
+Kéry & Royle (2016) \emph{Applied Hierarchical Modeling in Ecology}
 Chapter 20
 }

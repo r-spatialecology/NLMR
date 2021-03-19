@@ -31,10 +31,14 @@
 #' @examples
 #' # simulate fractional brownian motion
 #' fbm_raster  <- nlm_fbm(ncol = 20, nrow = 30, fract_dim = 0.8)
+#'
 #' \dontrun{
+#'
 #' # visualize the NLM
-#' rasterVis::levelplot(fbm_raster, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(fbm_raster)
+#'
 #' }
+#'
 #' @references
 #' Travis, J.M.J. & Dytham, C. (2004). A method for simulating patterns of
 #' habitat availability at static and dynamic range margins. \emph{Oikos} , 104, 410–416.

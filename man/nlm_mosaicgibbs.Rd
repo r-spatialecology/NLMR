@@ -4,8 +4,15 @@
 \alias{nlm_mosaicgibbs}
 \title{nlm_mosaicgibbs}
 \usage{
-nlm_mosaicgibbs(ncol, nrow, resolution = 1, germs, R, patch_classes,
-  rescale = TRUE)
+nlm_mosaicgibbs(
+  ncol,
+  nrow,
+  resolution = 1,
+  germs,
+  R,
+  patch_classes,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -43,7 +50,7 @@ The method works in principal like the tessellation method (\code{nlm_mosaictess
 but instead of a random point pattern the algorithm fits a simulated realization of the Strauss
 process. The Strauss process starts with a given number of points and
 uses a minimization approach to fit a point pattern with a given interaction
-parameter (0 - hardcore process; 1 - Poission process) and interaction radius
+parameter (0 - hardcore process; 1 - Poisson process) and interaction radius
 (distance of points/germs being apart).
 }
 \examples{
@@ -56,7 +63,7 @@ mosaicgibbs <- nlm_mosaicgibbs(ncol = 40,
 
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(mosaicgibbs, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(mosaicgibbs)
 }
 
 }

@@ -26,7 +26,7 @@
 #'
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(mosaictess, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(mosaictess)
 #' }
 #'
 #' @references

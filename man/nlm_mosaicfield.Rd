@@ -4,8 +4,17 @@
 \alias{nlm_mosaicfield}
 \title{nlm_mosaicfield}
 \usage{
-nlm_mosaicfield(ncol, nrow, resolution = 1, n = 20, mosaic_mean = 0.5,
-  mosaic_sd = 0.5, collect = FALSE, infinit = FALSE, rescale = TRUE)
+nlm_mosaicfield(
+  ncol,
+  nrow,
+  resolution = 1,
+  n = 20,
+  mosaic_mean = 0.5,
+  mosaic_sd = 0.5,
+  collect = FALSE,
+  infinit = FALSE,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -51,7 +60,7 @@ mosaic_field <- nlm_mosaicfield(ncol = 100,
                                 collect = FALSE)
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(mosaic_field, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(mosaic_field)
 }
 
 }

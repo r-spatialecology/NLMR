@@ -4,8 +4,7 @@
 \alias{nlm_planargradient}
 \title{nlm_planargradient}
 \usage{
-nlm_planargradient(ncol, nrow, resolution = 1, direction = NA,
-  rescale = TRUE)
+nlm_planargradient(ncol, nrow, resolution = 1, direction = NA, rescale = TRUE)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -39,7 +38,7 @@ planar_gradient <- nlm_planargradient(ncol = 200, nrow = 200)
 
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(planar_gradient, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(planar_gradient)
 }
 
 }

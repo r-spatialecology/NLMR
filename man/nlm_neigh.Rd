@@ -4,8 +4,17 @@
 \alias{nlm_neigh}
 \title{nlm_neigh}
 \usage{
-nlm_neigh(ncol, nrow, resolution = 1, p_neigh, p_empty, categories = 3,
-  neighbourhood = 4, proportions = NA, rescale = TRUE)
+nlm_neigh(
+  ncol,
+  nrow,
+  resolution = 1,
+  p_neigh,
+  p_empty,
+  categories = 3,
+  neighbourhood = 4,
+  proportions = NA,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -55,19 +64,19 @@ The algorithm draws a random cell and turns it into a given category based on
  Von-Neumann-neighborhood (4 cells), otherwise it is based on \code{p_empty}. To create
  clustered neutral landscape models, \code{p_empty} should be (significantly) smaller than
  \code{p_neigh}. By default, the Von-Neumann-neighborhood is used to check adjacent
- cells. The algorithm starts with the highest categorial value. If the
- proportion of cells with this value is reached, the categorial value is
+ cells. The algorithm starts with the highest categorical value. If the
+ proportion of cells with this value is reached, the categorical value is
  reduced by 1. By default, a uniform distribution of the categories is
  applied.
 }
 \examples{
 # simulate neighborhood model
-neigh_raster <- nlm_neigh(ncol = 50, nrow = 50, p_neigh = 0.1, p_empty = 0.3,
+neigh_raster <- nlm_neigh(ncol = 50, nrow = 50, p_neigh = 0.7, p_empty = 0.1,
                     categories = 5, neighbourhood = 4)
 
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(neigh_raster, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(neigh_raster)
 }
 
 }

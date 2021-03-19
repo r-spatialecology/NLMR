@@ -1,25 +1,18 @@
-## Resubmission
+## Version update
 
-Fixed invalid URL in documentation.
+Fix error coming from RandomFields dependency-
 
 ## Test environments
 
-* local Ubuntu Linux 16.04 LTS install
+* local Ubuntu Linux 18.10 LTS install
 * Ubuntu 14.04 (on travis-ci)
 * Windows Server 2012 R2 x64 (build 9600) (on appveyor)
-* Rhub
-  * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-  * Debian Linux, R-devel, GCC ASAN/UBSAN
-  * Fedora Linux, R-devel, clang, gfortran
-  * macOS 10.11 El Capitan, R-release
-  * macOS 10.9 Mavericks, R-oldrel
+* rhub
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-1 Note about rev as author role. Here we credit both reviewers from rOpenSci.
+0 errors | 0 warnings | 0 note
 
 ## Reverse dependencies
 

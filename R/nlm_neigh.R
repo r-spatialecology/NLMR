@@ -10,8 +10,8 @@
 #'  Von-Neumann-neighborhood (4 cells), otherwise it is based on \code{p_empty}. To create
 #'  clustered neutral landscape models, \code{p_empty} should be (significantly) smaller than
 #'  \code{p_neigh}. By default, the Von-Neumann-neighborhood is used to check adjacent
-#'  cells. The algorithm starts with the highest categorial value. If the
-#'  proportion of cells with this value is reached, the categorial value is
+#'  cells. The algorithm starts with the highest categorical value. If the
+#'  proportion of cells with this value is reached, the categorical value is
 #'  reduced by 1. By default, a uniform distribution of the categories is
 #'  applied.
 #'
@@ -49,12 +49,12 @@
 #'
 #' @examples
 #' # simulate neighborhood model
-#' neigh_raster <- nlm_neigh(ncol = 50, nrow = 50, p_neigh = 0.1, p_empty = 0.3,
+#' neigh_raster <- nlm_neigh(ncol = 50, nrow = 50, p_neigh = 0.7, p_empty = 0.1,
 #'                     categories = 5, neighbourhood = 4)
 #'
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(neigh_raster, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(neigh_raster)
 #' }
 #'
 #' @aliases nlm_neigh
@@ -96,70 +96,15 @@ nlm_neigh <-
 
     # Create an empty matrix of correct dimensions + additional 2 rows and
     # columns ----
-    matrix <- matrix(0, nrow + 2, ncol + 2)
+    mat <- matrix(0, nrow + 2, ncol + 2)
 
     # Keep applying random clusters until all elements have a value -----
-    while (cat > 0) {
-      j <- 0
-
-      while (j < no_cat[cat + 1]) {
-        # Pick random cell within correct dimensions and with value 0 ----
-        s <-
-          which(matrix[2:(nrow + 1), 2:(ncol + 1)] == 0, arr.ind = TRUE)
-        s <- s[sample(nrow(s), 1), ]
-        row <- as.integer(s[1]) + 1
-        col <- as.integer(s[2]) + 1
-
-        # Check neighbourhood of that cell ----
-        if (neighbourhood == 4) {
-          adjacent <- c(matrix[row - 1, col], # upper
-                        matrix[row, col - 1], # left
-                        matrix[row, col + 1], # right
-                        matrix[row + 1, col]) # lower
-        }
-        if (neighbourhood == 8) {
-          adjacent <- c(matrix[row - 1, col - 1],
-                        # upper left
-                        matrix[row - 1, col],
-                        # upper
-                        matrix[row - 1, col + 1],
-                        # upper right
-                        matrix[row, col - 1],
-                        # left
-                        matrix[row, col + 1],
-                        # right
-                        matrix[row + 1, col - 1],
-                        # lower left
-                        matrix[row + 1, col],
-                        # lower
-                        matrix[row + 1, col + 1]) # lower right
-        }
-
-        if (sum(adjacent, na.rm = TRUE) > 0) {
-          if (stats::runif(1, 0, 1) < p_neigh) {
-            matrix[row, col] <- cat
-            j <- j + 1
-          }
-        } else {
-          if (stats::runif(1, 0, 1) < p_empty) {
-            matrix[row, col] <- cat
-            j <- j + 1
-          }
-        }
-
-        # Update boundary conditions
-        matrix[1, ]         <- matrix[nrow + 1, ]
-        matrix[nrow + 2, ]  <- matrix[2, ]
-        matrix[, 1]         <- matrix[, ncol + 1]
-        matrix[, ncol + 2]  <- matrix[, 2]
-      } # close while j
-
-      cat <- cat - 1
-    } # close while i
+    seed <- sample.int(.Machine$integer.max, 1)
+    mat <- rcpp_neigh(nrow, ncol, mat, cat, no_cat, neighbourhood, p_neigh, p_empty, seed)
 
     # Cut additional cells and transform to raster ----
-    rndneigh_raster <- raster::raster(matrix[1:nrow + 1,
-                                             1:ncol + 1])
+    rndneigh_raster <- raster::raster(mat[1:nrow + 1,
+                                          1:ncol + 1])
 
     # specify resolution ----
     raster::extent(rndneigh_raster) <- c(0,
@@ -173,4 +118,4 @@ nlm_neigh <-
     }
 
     return(rndneigh_raster)
-}
+  }

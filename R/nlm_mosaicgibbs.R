@@ -9,7 +9,7 @@
 #' but instead of a random point pattern the algorithm fits a simulated realization of the Strauss
 #' process. The Strauss process starts with a given number of points and
 #' uses a minimization approach to fit a point pattern with a given interaction
-#' parameter (0 - hardcore process; 1 - Poission process) and interaction radius
+#' parameter (0 - hardcore process; 1 - Poisson process) and interaction radius
 #' (distance of points/germs being apart).
 #'
 #' @param ncol [\code{numerical(1)}]\cr
@@ -39,7 +39,7 @@
 #'
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(mosaicgibbs, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(mosaicgibbs)
 #' }
 #'
 #' @references
@@ -70,11 +70,11 @@ nlm_mosaicgibbs <- function(ncol,
   checkmate::assert_logical(rescale)
 
   # create point pattern (germs); step 2 in section 2.2 of Gauchel 2008
-  x <- spatstat::rSSI(R, germs, win = spatstat::owin(c(0, ncol), c(0, nrow)))
+  x <- spatstat.core::rSSI(R, germs, win = spatstat.geom::owin(c(0, ncol), c(0, nrow)))
 
   # ... and randomly allocate attribute class (here point pattern mark)
   m <- sample(rep(1:patch_classes, length.out = germs))
-  spatstat::marks(x) <- m
+  spatstat.geom::marks(x) <- m
 
   # Coerce to SpatialPointsDataFrame to preserve marks for interpolation ----
   strauss_points <- sf::st_as_sf(data.frame(x), coords = c("x", "y"))

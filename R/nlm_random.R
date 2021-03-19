@@ -25,7 +25,7 @@
 #'
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(random, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(random)
 #' }
 #'
 #' @aliases nlm_random

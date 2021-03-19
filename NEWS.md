@@ -1,10 +1,31 @@
 ____________________________________________________________________________________
+## NLMR 0.4.2 Release Notes
 
-## nlmr 0.3.0 Release Notes
+- Bugfix in nlm_mosaicfield to rely on new version of RandomFields
 
-v0.3.0 was released on 26/03/2018
+## NLMR 0.4.1 Release Notes
 
-### Changes
+- Bugfix in nlm_mpd to not rely on landscapetools
+
+## NLMR 0.4 Release Notes
+
+- nlm_neigh, nlm_mpd and nlm_randomrectangularcluster are now implemented in Rcpp
+- all of the Rcpp also take the R random seed
+- Minor bug fixes
+- Improvements to documentation
+- More examples on the package website
+
+## NLMR 0.3.2 Release Notes
+
+- Update citation 
+
+## NLMR 0.3.1 Release Notes
+
+- Minor bug fixes
+- Updated documentation
+- removed purrr as dependency
+
+## NLMR 0.3.0 Release Notes
 
 - successful review through rOpenSci
 - split package into two packages:
@@ -15,21 +36,13 @@ v0.3.0 was released on 26/03/2018
 - small bug fixes
 - `nlm_fBm` is now `nlm_fbm`
 
-## nlmr 0.2.1 Release Notes
-
-v0.2.1 was released on 13/02/2018
-
-### Changes
+## NLMR 0.2.1 Release Notes
 
 - Skip one test on CRAN to keep the Roboto font available
-- Function `util_facetplot` to plot a list of rasters as ggplot2 facet
+- Function `show_landscape` to plot a list of rasters as ggplot2 facet
 - Small updates to the webpage
 
-## nlmr 0.2 Release Notes
-
-v0.2 was released on 09/01/2018
-
-### Changes
+## NLMR 0.2 Release Notes
 
 - Small bug fixes
 - New neutral landscape models
@@ -41,10 +54,8 @@ v0.2 was released on 09/01/2018
 - We now have unit tests covering the main functionality of the package
 - Removed several packages as dependencies 
 
-## nlmr 0.1.0 Release Notes
+## NLMR 0.1.0 Release Notes
 
 v0.1.0 was released on 30/11/2017
 
-### Major changes
-
-First stable release of nlmr
+- First stable release of NLMR

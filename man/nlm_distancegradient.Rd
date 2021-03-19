@@ -43,7 +43,7 @@ distance_gradient <- nlm_distancegradient(ncol = 100, nrow = 100,
                                            origin = c(20, 30, 10, 15))
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(distance_gradient, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(distance_gradient)
 }
 }
 \seealso{

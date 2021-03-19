@@ -30,7 +30,7 @@
 #' distinct from one another than they are to closer objects.
 #'
 #' @references
-#' Kéry & Royle (2016) \emph{Applied Hierarachical Modeling in Ecology}
+#' Kéry & Royle (2016) \emph{Applied Hierarchical Modeling in Ecology}
 #' Chapter 20
 #'
 #' @examples
@@ -42,7 +42,7 @@
 #'
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(gaussian_field, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(gaussian_field)
 #' }
 #'
 #' @aliases nlm_gaussianfield

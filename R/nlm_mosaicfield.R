@@ -39,7 +39,7 @@
 #'                                 collect = FALSE)
 #' \dontrun{
 #' # visualize the NLM
-#' rasterVis::levelplot(mosaic_field, margin = FALSE, par.settings = rasterVis::viridisTheme())
+#' landscapetools::show_landscape(mosaic_field)
 #' }
 #'
 #' @aliases nlm_mosaicfield
@@ -71,8 +71,8 @@ nlm_mosaicfield <- function(ncol,
   mosaicfields_return <- list()
 
   if (!is.na(n)) {
-    mosaicfield_result <- spatstat::rMosaicField(
-      spatstat::rpoislinetess(4),
+    mosaicfield_result <- spatstat.core::rMosaicField(
+      spatstat.core::rpoislinetess(4),
       stats::rnorm,
       dimyx = c(nrow, ncol),
       rgenargs = list(mean = mosaic_mean,
@@ -85,8 +85,8 @@ nlm_mosaicfield <- function(ncol,
     }
 
     for (i in 2:n) {
-      mosaicfield_n <- spatstat::rMosaicField(
-        spatstat::rpoislinetess(4),
+      mosaicfield_n <- spatstat.core::rMosaicField(
+        spatstat.core::rpoislinetess(4),
         stats::rnorm,
         dimyx = c(nrow, ncol),
         rgenargs = list(mean = mosaic_mean,
@@ -123,12 +123,12 @@ nlm_mosaicfield <- function(ncol,
     if (isTRUE(collect)) {
       names(mosaicfield_list) <- seq_along(mosaicfield_list)
       mosaicfield_list <-
-        purrr::map(seq_along(mosaicfield_list), function(i) {
+        lapply(seq_along(mosaicfield_list), function(i) {
           mosaicfield_list[[i]] <- mosaicfield_list[[i]] / sqrt(i)
         })
 
       mosaicfield_list <-
-        purrr::map(seq_along(mosaicfield_list), function(i) {
+        lapply(seq_along(mosaicfield_list), function(i) {
           # coerce spatstat image list to raster and set proper resolution ----
           mosaicfield_list[[i]] <- raster::rasterFromXYZ(
             as.data.frame(mosaicfield_list[[i]]))
@@ -159,7 +159,7 @@ nlm_mosaicfield <- function(ncol,
 
   if (isTRUE(infinit)) {
     # INFINITE STEPS:
-    X <- spatstat::rLGCP(
+    X <- spatstat.core::rLGCP(
       "exp",
       4,
       var = 1,
@@ -167,7 +167,7 @@ nlm_mosaicfield <- function(ncol,
       scale = .2,
       saveLambda = TRUE
     )
-    mosaicfield_inf <- RandomFields::log(attr(X, "Lambda"))
+    mosaicfield_inf <- log(attr(X, "Lambda"))
 
     # coerce spatstat image to raster and set proper resolution ----
     mosaicfield_raster <-

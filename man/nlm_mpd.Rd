@@ -4,8 +4,16 @@
 \alias{nlm_mpd}
 \title{nlm_mpd}
 \usage{
-nlm_mpd(ncol, nrow, resolution = 1, roughness = 0.5, rand_dev = 1,
-  rescale = TRUE, verbose = TRUE)
+nlm_mpd(
+  ncol,
+  nrow,
+  resolution = 1,
+  roughness = 0.5,
+  rand_dev = 1,
+  torus = FALSE,
+  rescale = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -23,6 +31,8 @@ Controls the level of spatial autocorrelation (!= Hurst exponent)}
 \item{rand_dev}{[\code{numerical(1)}]\cr
 Initial standard deviation for the displacement step (default == 1), sets the
 scale of the overall variance in the resulting landscape.}
+
+\item{torus}{[\code{logical(1)}]\cr  Logical value indicating wether the algorithm should be simulated on a torus (default FALSE)}
 
 \item{rescale}{[\code{logical(1)}]\cr If \code{TRUE} (default), the values
 are rescaled between 0-1.}
@@ -56,25 +66,16 @@ It performs the following steps:
 
 At each iteration the roughness, an approximation to common Hurst exponent,
 is reduced.
-
-The image below shows the steps involved in running the diamond-square
-algorithm on a 5 × 5 matrix:
-
-\if{html}{\figure{Diamond_Square.png}{options: width="300\%" alt=""}}
-
-(By Christopher Ewin - Own work, CC BY-SA 4.0,
-https://commons.wikimedia.org/w/index.php?curid=42510593)
 }
 \examples{
 
 # simulate midpoint displacement
 midpoint_displacememt <- nlm_mpd(ncol = 100,
                                  nrow = 100,
-                                 roughness = 0.61)
+                                 roughness = 0.3)
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(midpoint_displacememt, margin = FALSE,
-par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(midpoint_displacememt)
 }
 }
 \references{

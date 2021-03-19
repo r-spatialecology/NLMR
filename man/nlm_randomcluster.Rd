@@ -4,8 +4,15 @@
 \alias{nlm_randomcluster}
 \title{nlm_randomcluster}
 \usage{
-nlm_randomcluster(ncol, nrow, resolution = 1, p, ai = c(0.5, 0.5),
-  neighbourhood = 4, rescale = TRUE)
+nlm_randomcluster(
+  ncol,
+  nrow,
+  resolution = 1,
+  p,
+  ai = c(0.5, 0.5),
+  neighbourhood = 4,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{integer(1)}]\cr
@@ -48,7 +55,7 @@ random_cluster <- nlm_randomcluster(ncol = 30, nrow = 30,
                                      ai = c(0.25, 0.25, 0.5))
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(random_cluster, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(random_cluster)
 }
 
 }

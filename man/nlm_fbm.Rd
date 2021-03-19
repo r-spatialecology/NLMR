@@ -4,8 +4,15 @@
 \alias{nlm_fbm}
 \title{nlm_fbm}
 \usage{
-nlm_fbm(ncol, nrow, resolution = 1, fract_dim = 1, user_seed = NULL,
-  rescale = TRUE, ...)
+nlm_fbm(
+  ncol,
+  nrow,
+  resolution = 1,
+  fract_dim = 1,
+  user_seed = NULL,
+  rescale = TRUE,
+  ...
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -45,10 +52,14 @@ Neutral landscapes are generated using fractional Brownian motion,
 \examples{
 # simulate fractional brownian motion
 fbm_raster  <- nlm_fbm(ncol = 20, nrow = 30, fract_dim = 0.8)
+
 \dontrun{
+
 # visualize the NLM
-rasterVis::levelplot(fbm_raster, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(fbm_raster)
+
 }
+
 }
 \references{
 Travis, J.M.J. & Dytham, C. (2004). A method for simulating patterns of

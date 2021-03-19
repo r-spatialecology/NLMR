@@ -4,8 +4,14 @@
 \alias{nlm_randomrectangularcluster}
 \title{nlm_randomrectangularcluster}
 \usage{
-nlm_randomrectangularcluster(ncol, nrow, resolution = 1, minl, maxl,
-  rescale = TRUE)
+nlm_randomrectangularcluster(
+  ncol,
+  nrow,
+  resolution = 1,
+  minl,
+  maxl,
+  rescale = TRUE
+)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr Number of columns forming the raster.}
@@ -31,18 +37,17 @@ The random rectangular cluster algorithm starts to fill a raster randomly
 with rectangles defined by \code{minl} and \code{maxl} until the surface
 of the landscape is completely covered.
 This is one type of realisation of a "falling/dead leaves" algorithm,
-for more details see Galerne & Goussea (2012).
+for more details see Galerne & Gousseau (2012).
 }
 \examples{
 # simulate random rectangular cluster
-randomrectangular_cluster <- nlm_randomrectangularcluster(ncol = 30,
+randomrectangular_cluster <- nlm_randomrectangularcluster(ncol = 50,
                                                           nrow = 30,
                                                           minl = 5,
                                                           maxl = 10)
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(randomrectangular_cluster, margin = FALSE,
-par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(randomrectangular_cluster)
 }
 
 }

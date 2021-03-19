@@ -4,8 +4,7 @@
 \alias{nlm_edgegradient}
 \title{nlm_edgegradient}
 \usage{
-nlm_edgegradient(ncol, nrow, resolution = 1, direction = NA,
-  rescale = TRUE)
+nlm_edgegradient(ncol, nrow, resolution = 1, direction = NA, rescale = TRUE)
 }
 \arguments{
 \item{ncol}{[\code{numerical(1)}]\cr
@@ -41,7 +40,7 @@ edge_gradient <- nlm_edgegradient(ncol = 100, nrow = 100, direction = 80)
 
 \dontrun{
 # visualize the NLM
-rasterVis::levelplot(edge_gradient, margin = FALSE, par.settings = rasterVis::viridisTheme())
+landscapetools::show_landscape(edge_gradient)
 }
 
 }
